@@ -1,7 +1,7 @@
 # BOJ_study
 백준 알고리즘 풀이를 저장하는 레포지토리입니다. 
 
-Language : Python
+Language : Python3
 
 풀이 및 정리는 Notion에서 진행 중 입니다.
 
