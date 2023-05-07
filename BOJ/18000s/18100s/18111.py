@@ -1,31 +1,26 @@
-import sys 
-input = sys.stdin.readline
+import sys
+from collections import Counter
 
-N, M, B = map(int, input().split()) # NxM, B개의 블럭
-block = []
-for _ in range(N):
-    block.append([int(x) for x in input().rstrip().split()])
+n, m, inven = map(int, sys.stdin.readline().split())
+ground = []
+for _ in range(n): ground += map(int, sys.stdin.readline().split())
+height, time = 0, 1000000000000000
 
-ans = int(1e9)
-gravel = 0
+min_h = min(ground)
+max_h = max(ground)
+_sum = sum(ground)
+ground = dict(Counter(ground))
 
-for i in range(257):
-    use = 0 # 사용블럭
-    take = 0 # 가져온 블럭
-    for x in range(N):
-        for y in range(M):
-            if block[x][y] > i:
-                take += block[x][y] - i
-            else:
-                use += i - block[x][y]
-    
-    if use > take + B:
-        continue
+for i in range(min_h, max_h + 1):
+    if _sum + inven >= i * n * m:
+        cur_time = 0
+        for key in ground:
+            if key > i:
+                cur_time += (key - i) * ground[key] * 2
+            elif key < i:
+                cur_time += (i - key) * ground[key]
+        if cur_time <= time:
+            time = cur_time
+            height = i
 
-    time = take * 2 + use
-
-    if time <= ans:
-        ans = time
-        gravel = i
-
-print(ans, gravel)
+print(time, height)
