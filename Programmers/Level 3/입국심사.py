@@ -1,3 +1,5 @@
+# 입국심사
+
 def solution(n, times):
     # 6명이고 7분, 10분 걸림 각각
     left = 0
